@@ -7,365 +7,171 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --cork-1:#8a5a34;
-    --cork-2:#7c4f2c;
-    --cork-3:#6d4526;
-    --card:#f6ecd4;
-    --card-2:#efe3c4;
-    --card-line:#d9c9a2;
-    --ink:#2a2018;
-    --ink-soft:#5b4a37;
-    --pin-red:#b23b3b;
-    --pin-red-dark:#8a2c2c;
-    --pin-green:#43614a;
-    --pin-green-dark:#324a38;
-    --gold:#bd8a34;
-    --paper-shadow: rgba(20,12,4,.35);
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    font-family:'IBM Plex Sans Arabic', sans-serif;
-    color:var(--ink);
-    background:
-      radial-gradient(circle at 15% 20%, rgba(255,255,255,.06) 0, transparent 35%),
-      radial-gradient(circle at 85% 75%, rgba(255,255,255,.04) 0, transparent 40%),
-      repeating-radial-gradient(circle at 12% 8%, rgba(0,0,0,.07) 0px, transparent 2px, transparent 7px),
-      repeating-radial-gradient(circle at 60% 70%, rgba(0,0,0,.05) 0px, transparent 2px, transparent 9px),
-      linear-gradient(160deg, var(--cork-1), var(--cork-2) 55%, var(--cork-3));
-    min-height:100vh;
-    line-height:1.7;
-  }
-  .wrap{max-width:1040px; margin:0 auto; padding:56px 24px 80px;}
-
-  /* ---------- generic pinned card ---------- */
-  .card{
-    background:var(--card);
-    box-shadow:0 14px 26px var(--paper-shadow), 0 2px 0 rgba(255,255,255,.4) inset;
-    position:relative;
-    padding:28px 26px;
-  }
-  .pin{
-    position:absolute; top:-14px; right:50%; transform:translateX(50%);
-    width:20px; height:20px; border-radius:50%;
-    box-shadow:0 3px 5px rgba(0,0,0,.45);
-  }
-  .pin.red{background:radial-gradient(circle at 35% 30%, #e07a7a, var(--pin-red) 55%, var(--pin-red-dark));}
-  .pin.green{background:radial-gradient(circle at 35% 30%, #7fa08a, var(--pin-green) 55%, var(--pin-green-dark));}
-  .pin.gold{background:radial-gradient(circle at 35% 30%, #e6c273, var(--gold) 55%, #93691f);}
-
-  /* ---------- hero ---------- */
-  header{text-align:center; margin-bottom:64px;}
-  .board-title{
-    display:inline-block; position:relative; margin-top:26px;
-    background:var(--card);
-    box-shadow:0 18px 34px var(--paper-shadow);
-    padding:34px 46px 30px;
-    transform:rotate(-1.2deg);
-  }
-  .board-title::before{
-    content:""; position:absolute; top:-16px; right:calc(50% - 44px);
-    width:88px; height:26px; background:rgba(255,255,255,.55);
-    border:1px solid rgba(0,0,0,.05); transform:rotate(-3deg);
-  }
-  .board-title h1{
-    font-family:'Aref Ruqaa', serif; font-weight:700;
-    font-size:clamp(2.2rem, 5vw, 3.4rem); margin:0 0 6px;
-    color:var(--ink); letter-spacing:.5px;
-  }
-  .board-title p{
-    margin:0; font-size:1.05rem; color:var(--ink-soft); max-width:34ch;
-    margin-inline:auto;
-  }
-  .hero-line{
-    margin:30px auto 0; max-width:52ch; color:#f1e6cf; font-size:1.05rem;
-  }
-  .cta-row{
-    display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-top:40px;
-  }
-  .tab-card{
-    font-family:'IBM Plex Sans Arabic', sans-serif;
-    background:var(--card); border:none; cursor:pointer;
-    padding:16px 30px; font-size:1rem; font-weight:600; color:var(--ink);
-    box-shadow:0 10px 20px var(--paper-shadow);
-    position:relative; transition:transform .15s ease;
-  }
-  .tab-card:hover{transform:translateY(-3px);}
-  .tab-card.idea{transform:rotate(-2deg);}
-  .tab-card.idea:hover{transform:rotate(-2deg) translateY(-3px);}
-  .tab-card.company{transform:rotate(2deg);}
-  .tab-card.company:hover{transform:rotate(2deg) translateY(-3px);}
-  .tab-card .pin{top:-12px;}
-
-  /* ---------- how it works ---------- */
-  section{margin-bottom:70px;}
-  .section-title{
-    font-family:'Aref Ruqaa', serif; font-size:1.9rem; color:#f6ecd4;
-    text-align:center; margin-bottom:38px; font-weight:700;
-  }
-  .flow{
-    display:grid; grid-template-columns:repeat(4, 1fr); gap:22px;
-    position:relative;
-  }
-  .flow::before{
-    content:""; position:absolute; top:52px; right:8%; left:8%; height:0;
-    border-top:2px dashed rgba(246,236,212,.35); z-index:0;
-  }
-  .note{
-    background:var(--card); padding:22px 16px 20px; position:relative;
-    box-shadow:0 10px 18px var(--paper-shadow); z-index:1;
-    background-image:repeating-linear-gradient(
-      var(--card) 0px, var(--card) 27px, var(--card-line) 28px, var(--card) 29px
-    );
-  }
-  .flow .note:nth-child(1){transform:rotate(-2deg);}
-  .flow .note:nth-child(2){transform:rotate(1.5deg);}
-  .flow .note:nth-child(3){transform:rotate(-1deg);}
-  .flow .note:nth-child(4){transform:rotate(2deg);}
-  .note .num{
-    font-family:'Aref Ruqaa', serif; font-weight:700; font-size:1.6rem;
-    color:var(--gold); display:block; margin-bottom:6px;
-  }
-  .note p{margin:0; font-size:.92rem; color:var(--ink-soft);}
-
-  /* ---------- trust ---------- */
-  .trust{
-    display:flex; gap:24px; flex-wrap:wrap; justify-content:center;
-  }
-  .trust .note{flex:1 1 260px; max-width:340px; text-align:center; padding:26px 20px;}
-  .trust .note svg{width:30px; height:30px; margin-bottom:10px; color:var(--gold);}
-  .trust .note h3{margin:0 0 8px; font-size:1.02rem;}
-  .trust .note p{font-size:.9rem;}
-
-  /* ---------- waitlist ---------- */
-  .forms{
-    display:grid; grid-template-columns:1fr 1fr; gap:30px;
-  }
-  .form-card{
-    padding:30px 26px 28px;
-  }
-  .form-card.idea{transform:rotate(-1deg);}
-  .form-card.company{transform:rotate(1deg);}
-  .form-card h3{
-    font-family:'Aref Ruqaa', serif; font-size:1.4rem; margin:6px 0 4px;
-  }
-  .form-card .sub{color:var(--ink-soft); font-size:.88rem; margin:0 0 20px;}
-  label{display:block; font-size:.85rem; font-weight:600; margin:14px 0 6px; color:var(--ink);}
-  input[type=text], input[type=email], select{
-    width:100%; padding:10px 12px; font-family:inherit; font-size:.95rem;
-    border:1px solid var(--card-line); background:#fffdf7; color:var(--ink);
-  }
-  input:focus, select:focus{outline:2px solid var(--gold); outline-offset:1px;}
-  fieldset{border:none; padding:0; margin:14px 0 0;}
-  fieldset legend{font-size:.85rem; font-weight:600; margin-bottom:6px; padding:0;}
-  .yn{display:flex; gap:16px; font-size:.9rem; font-weight:400;}
-  .yn label{display:flex; align-items:center; gap:6px; font-weight:400; margin:0;}
-  .stamp-btn{
-    margin-top:22px; width:100%; padding:13px; font-family:'IBM Plex Sans Arabic';
-    font-size:1rem; font-weight:700; color:#fffdf7; border:none; cursor:pointer;
-    letter-spacing:.5px;
-  }
-  .form-card.idea .stamp-btn{background:var(--pin-red);}
-  .form-card.company .stamp-btn{background:var(--pin-green);}
-  .stamp-btn:hover{filter:brightness(1.08);}
-  .stamp-btn:disabled{opacity:.6; cursor:default;}
-
-  .success{
-    display:none; text-align:center; padding:20px 10px;
-  }
-  .success.show{display:block;}
-  .success .mark{
-    display:inline-block; border:3px solid var(--pin-red); color:var(--pin-red);
-    font-family:'Aref Ruqaa', serif; font-weight:700; font-size:1.1rem;
-    padding:8px 18px; transform:rotate(-6deg); margin-bottom:12px;
-  }
-  .form-card.company .success .mark{border-color:var(--pin-green); color:var(--pin-green);}
-  .success p{color:var(--ink-soft); font-size:.9rem; margin:0;}
-  .form-body.hide{display:none;}
-
-  footer{
-    text-align:center; color:rgba(246,236,212,.6); font-size:.82rem; margin-top:20px;
-  }
-
-  @media (max-width:720px){
-    .flow{grid-template-columns:1fr 1fr;}
-    .flow::before{display:none;}
-    .forms{grid-template-columns:1fr;}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .tab-card, .stamp-btn{transition:none;}
-  }
+:root{
+  --cork-1:#8a5a34;--cork-2:#7c4f2c;--cork-3:#6d4526;
+  --card:#f6ecd4;--card-2:#efe3c4;--card-line:#d9c9a2;
+  --ink:#2a2018;--ink-soft:#5b4a37;--pin-red:#b23b3b;
+  --pin-red-dark:#8a2c2c;--pin-green:#43614a;--pin-green-dark:#324a38;
+  --gold:#bd8a34;--paper-shadow:rgba(20,12,4,.35);
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{
+font-family:'IBM Plex Sans Arabic',sans-serif;color:var(--ink);
+background:
+radial-gradient(circle at 15% 20%,rgba(255,255,255,.06) 0,transparent 35%),
+radial-gradient(circle at 85% 75%,rgba(255,255,255,.04) 0,transparent 40%),
+repeating-radial-gradient(circle at 12% 8%,rgba(0,0,0,.07) 0,transparent 2px,transparent 7px),
+repeating-radial-gradient(circle at 60% 70%,rgba(0,0,0,.05) 0,transparent 2px,transparent 9px),
+linear-gradient(160deg,var(--cork-1),var(--cork-2) 55%,var(--cork-3));
+min-height:100vh;line-height:1.7
+}
+.wrap{max-width:1040px;margin:0 auto;padding:56px 24px 80px}
+.card{background:var(--card);box-shadow:0 14px 26px var(--paper-shadow),0 2px 0 rgba(255,255,255,.4) inset;position:relative;padding:28px 26px}
+.pin{position:absolute;top:-14px;right:50%;transform:translateX(50%);width:20px;height:20px;border-radius:50%;box-shadow:0 3px 5px rgba(0,0,0,.45)}
+.pin.red{background:radial-gradient(circle at 35% 30%,#e07a7a,var(--pin-red) 55%,var(--pin-red-dark))}
+.pin.green{background:radial-gradient(circle at 35% 30%,#7fa08a,var(--pin-green) 55%,var(--pin-green-dark))}
+.pin.gold{background:radial-gradient(circle at 35% 30%,#e6c273,var(--gold) 55%,#93691f)}
+header{text-align:center;margin-bottom:64px}
+.board-title{display:inline-block;position:relative;margin-top:26px;background:var(--card);box-shadow:0 18px 34px var(--paper-shadow);padding:34px 46px 30px;transform:rotate(-1.2deg)}
+.board-title::before{content:"";position:absolute;top:-16px;right:calc(50% - 44px);width:88px;height:26px;background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.05);transform:rotate(-3deg)}
+.board-title h1{font-family:'Aref Ruqaa',serif;font-weight:700;font-size:clamp(2.2rem,5vw,3.4rem);margin:0 0 6px;color:var(--ink);letter-spacing:.5px}
+.board-title p{margin:0;font-size:1.05rem;color:var(--ink-soft);max-width:34ch;margin-inline:auto}
+.hero-line{margin:30px auto 0;max-width:52ch;color:#f1e6cf;font-size:1.05rem}
+.cta-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+.tab-card{font-family:'IBM Plex Sans Arabic',sans-serif;background:var(--card);border:none;cursor:pointer;padding:16px 30px;font-size:1rem;font-weight:600;color:var(--ink);box-shadow:0 10px 20px var(--paper-shadow);position:relative;transition:transform .15s ease}
+.tab-card:hover{transform:translateY(-3px)}.tab-card.idea{transform:rotate(-2deg)}.tab-card.idea:hover{transform:rotate(-2deg) translateY(-3px)}.tab-card.company{transform:rotate(2deg)}.tab-card.company:hover{transform:rotate(2deg) translateY(-3px)}.tab-card .pin{top:-12px}
+section{margin-bottom:70px}.section-title{font-family:'Aref Ruqaa',serif;font-size:1.9rem;color:#f6ecd4;text-align:center;margin-bottom:38px;font-weight:700}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;position:relative}.flow::before{content:"";position:absolute;top:52px;right:8%;left:8%;height:0;border-top:2px dashed rgba(246,236,212,.35);z-index:0}
+.note{background:var(--card);padding:22px 16px 20px;position:relative;box-shadow:0 10px 18px var(--paper-shadow);z-index:1;background-image:repeating-linear-gradient(var(--card) 0,var(--card) 27px,var(--card-line) 28px,var(--card) 29px)}
+.flow .note:nth-child(1){transform:rotate(-2deg)}.flow .note:nth-child(2){transform:rotate(1.5deg)}.flow .note:nth-child(3){transform:rotate(-1deg)}.flow .note:nth-child(4){transform:rotate(2deg)}
+.note .num{font-family:'Aref Ruqaa',serif;font-weight:700;font-size:1.6rem;color:var(--gold);display:block;margin-bottom:6px}.note p{margin:0;font-size:.92rem;color:var(--ink-soft)}
+.trust{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}.trust .note{flex:1 1 260px;max-width:340px;text-align:center;padding:26px 20px}.trust .note svg{width:30px;height:30px;margin-bottom:10px;color:var(--gold)}.trust .note h3{margin:0 0 8px;font-size:1.02rem}.trust .note p{font-size:.9rem}
+.forms{display:grid;grid-template-columns:1fr 1fr;gap:30px}.form-card{padding:30px 26px 28px}.form-card.idea{transform:rotate(-1deg)}.form-card.company{transform:rotate(1deg)}
+.form-card h3{font-family:'Aref Ruqaa',serif;font-size:1.4rem;margin:6px 0 4px}.form-card .sub{color:var(--ink-soft);font-size:.88rem;margin:0 0 20px}
+label{display:block;font-size:.85rem;font-weight:600;margin:14px 0 6px;color:var(--ink)}
+input[type=text],input[type=email],select{width:100%;padding:10px 12px;font-family:inherit;font-size:.95rem;border:1px solid var(--card-line);background:#fffdf7;color:var(--ink)}
+input:focus,select:focus{outline:2px solid var(--gold);outline-offset:1px}
+fieldset{border:none;padding:0;margin:14px 0 0}fieldset legend{font-size:.85rem;font-weight:600;margin-bottom:6px;padding:0}.yn{display:flex;gap:16px;font-size:.9rem;font-weight:400}.yn label{display:flex;align-items:center;gap:6px;font-weight:400;margin:0}
+.stamp-btn{margin-top:22px;width:100%;padding:13px;font-family:'IBM Plex Sans Arabic';font-size:1rem;font-weight:700;color:#fffdf7;border:none;cursor:pointer;letter-spacing:.5px}
+.form-card.idea .stamp-btn{background:var(--pin-red)}.form-card.company .stamp-btn{background:var(--pin-green)}.stamp-btn:hover{filter:brightness(1.08)}.stamp-btn:disabled{opacity:.6;cursor:default}
+.success{display:none;text-align:center;padding:20px 10px}.success.show{display:block}.success .mark{display:inline-block;border:3px solid var(--pin-red);color:var(--pin-red);font-family:'Aref Ruqaa',serif;font-weight:700;font-size:1.1rem;padding:8px 18px;transform:rotate(-6deg);margin-bottom:12px}.form-card.company .success .mark{border-color:var(--pin-green);color:var(--pin-green)}.success p{color:var(--ink-soft);font-size:.9rem;margin:0}.form-body.hide{display:none}
+.error{display:none;margin-top:14px;padding:10px;background:#f3d7d2;color:#7d2525;font-size:.85rem;text-align:center}.error.show{display:block}
+footer{text-align:center;color:rgba(246,236,212,.6);font-size:.82rem;margin-top:20px}
+@media(max-width:720px){.flow{grid-template-columns:1fr 1fr}.flow::before{display:none}.forms{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.tab-card,.stamp-btn{transition:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
+<header>
+<div class="hero-line">منصة تقيّم أفكارك بالذكاء الاصطناعي، وتربطك مباشرة بالشركات الباحثة عن ابتكار جديد.</div>
+<div class="board-title"><h1>IdeaMarket</h1><p>سوق الأفكار — لديك فكرة جيدة؟ لا تدعها تضيع</p></div>
+<div class="cta-row">
+<button class="tab-card idea" onclick="document.getElementById('idea-form').scrollIntoView({behavior:'smooth'})"><span class="pin red"></span>🟢 عندي فكرة</button>
+<button class="tab-card company" onclick="document.getElementById('company-form').scrollIntoView({behavior:'smooth'})"><span class="pin green"></span>🔵 أبحث عن أفكار لشركتي</button>
+</div>
+</header>
 
-  <header>
-    <div class="hero-line">منصة تقيّم أفكارك بالذكاء الاصطناعي، وتربطك مباشرة بالشركات الباحثة عن ابتكار جديد.</div>
-    <div class="board-title">
-      <h1>IdeaMarket</h1>
-      <p>سوق الأفكار — لديك فكرة جيدة؟ لا تدعها تضيع</p>
-    </div>
-    <div class="cta-row">
-      <button class="tab-card idea" onclick="document.getElementById('idea-form').scrollIntoView({behavior:'smooth'})">
-        <span class="pin red"></span>
-        🟢 عندي فكرة
-      </button>
-      <button class="tab-card company" onclick="document.getElementById('company-form').scrollIntoView({behavior:'smooth'})">
-        <span class="pin green"></span>
-        🔵 أبحث عن أفكار لشركتي
-      </button>
-    </div>
-  </header>
+<section>
+<h2 class="section-title">كيف تعمل المنصة</h2>
+<div class="flow">
+<div class="note"><span class="num">١</span><p>اكتب فكرتك — المشكلة، الحل، ومن يستفيد منها</p></div>
+<div class="note"><span class="num">٢</span><p>الذكاء الاصطناعي يحلّلها ويمنحها تقييمًا وتحليل منافسين</p></div>
+<div class="note"><span class="num">٣</span><p>تُعرض بشكل خاص وآمن على شركات تبحث عن أفكار في مجالك</p></div>
+<div class="note"><span class="num">٤</span><p>تفاوض مباشر داخل المنصة عند وجود اهتمام حقيقي</p></div>
+</div>
+</section>
 
-  <section>
-    <h2 class="section-title">كيف تعمل المنصة</h2>
-    <div class="flow">
-      <div class="note"><span class="num">١</span><p>اكتب فكرتك — المشكلة، الحل، ومن يستفيد منها</p></div>
-      <div class="note"><span class="num">٢</span><p>الذكاء الاصطناعي يحلّلها ويمنحها تقييمًا وتحليل منافسين</p></div>
-      <div class="note"><span class="num">٣</span><p>تُعرض بشكل خاص وآمن على شركات تبحث عن أفكار في مجالك</p></div>
-      <div class="note"><span class="num">٤</span><p>تفاوض مباشر داخل المنصة عند وجود اهتمام حقيقي</p></div>
-    </div>
-  </section>
+<section>
+<h2 class="section-title">لماذا تثق بنا؟</h2>
+<div class="trust">
+<div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><h3>فكرتك تبقى سرية</h3><p>لا تُكشف التفاصيل الكاملة حتى تقرر أنت مشاركتها مع طرف مهتم.</p></div>
+<div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="15" rx="1"/><path d="M4 9h16M8 3v4M16 3v4"/></svg><h3>توثيق تاريخ الإيداع</h3><p>نسجّل تاريخ ووقت تقديم فكرتك كدليل أولوية — دون أن يغني ذلك عن حماية قانونية رسمية.</p></div>
+</div>
+</section>
 
-  <section>
-    <h2 class="section-title">لماذا تثق بنا؟</h2>
-    <div class="trust">
-      <div class="note">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-        <h3>فكرتك تبقى سرية</h3>
-        <p>لا تُكشف التفاصيل الكاملة حتى تقرر أنت مشاركتها مع طرف مهتم.</p>
-      </div>
-      <div class="note">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="15" rx="1"/><path d="M4 9h16M8 3v4M16 3v4"/></svg>
-        <h3>توثيق تاريخ الإيداع</h3>
-        <p>نسجّل تاريخ ووقت تقديم فكرتك كدليل أولوية — دون أن يغني ذلك عن حماية قانونية رسمية.</p>
-      </div>
-    </div>
-  </section>
+<section>
+<h2 class="section-title">سجّل اهتمامك مبكرًا</h2>
+<p style="text-align:center;color:#f1e6cf;margin-top:-20px;margin-bottom:36px;font-size:.95rem;">كن من أول ١٠٠ مستخدم — التسجيل المبكر يمنحك أولوية عند الإطلاق</p>
+<div class="forms">
 
-  <section>
-    <h2 class="section-title">سجّل اهتمامك مبكرًا</h2>
-    <p style="text-align:center; color:#f1e6cf; margin-top:-20px; margin-bottom:36px; font-size:.95rem;">
-      كن من أول ١٠٠ مستخدم — التسجيل المبكر يمنحك أولوية عند الإطلاق
-    </p>
-    <div class="forms">
+<div class="card form-card idea" id="idea-form">
+<span class="pin red"></span>
+<div class="form-body" id="idea-body">
+<h3>عندي فكرة</h3><p class="sub">سجّل بياناتك وسنعلمك فور إطلاق التقييم بالذكاء الاصطناعي</p>
+<form onsubmit="return submitForm(event,'idea')">
+<label for="idea-name">الاسم</label><input type="text" id="idea-name" name="name" required>
+<label for="idea-email">البريد الإلكتروني</label><input type="email" id="idea-email" name="email" required>
+<label for="idea-domain">مجال فكرتك (اختياري)</label>
+<select id="idea-domain" name="domain"><option value="">اختر مجالًا</option><option>تقنية</option><option>صحة</option><option>تعليم</option><option>تجارة</option><option>ذكاء اصطناعي</option><option>أخرى</option></select>
+<fieldset><legend>هل كنت تدفع ١٠€ شهريًا لعرض فكرتك على شركات مهتمة؟</legend>
+<div class="yn"><label><input type="radio" name="wouldPay" value="نعم" required> نعم</label><label><input type="radio" name="wouldPay" value="ربما"> ربما</label><label><input type="radio" name="wouldPay" value="لا"> لا</label></div>
+</fieldset>
+<button class="stamp-btn" type="submit">سجّل اهتمامي</button>
+<div class="error" id="idea-error">حدث خطأ أثناء الإرسال. حاول مرة أخرى.</div>
+</form>
+</div>
+<div class="success" id="idea-success"><div class="mark">تم التسجيل</div><p>شكرًا لك — تم استلام بياناتك بنجاح وسنراسلك عند الإطلاق.</p></div>
+</div>
 
-      <!-- IDEA OWNER FORM -->
-      <div class="card form-card idea" id="idea-form">
-        <span class="pin red"></span>
-        <div class="form-body" id="idea-body">
-          <h3>عندي فكرة</h3>
-          <p class="sub">سجّل بياناتك وسنعلمك فور إطلاق التقييم بالذكاء الاصطناعي</p>
-          <form onsubmit="return submitForm(event,'idea')">
-            <label for="idea-name">الاسم</label>
-            <input type="text" id="idea-name" required>
-            <label for="idea-email">البريد الإلكتروني</label>
-            <input type="email" id="idea-email" required>
-            <label for="idea-domain">مجال فكرتك (اختياري)</label>
-            <select id="idea-domain">
-              <option value="">اختر مجالًا</option>
-              <option>تقنية</option><option>صحة</option><option>تعليم</option>
-              <option>تجارة</option><option>ذكاء اصطناعي</option><option>أخرى</option>
-            </select>
-            <fieldset>
-              <legend>هل كنت تدفع ١٠€ شهريًا لعرض فكرتك على شركات مهتمة؟</legend>
-              <div class="yn">
-                <label><input type="radio" name="idea-pay" value="نعم" required> نعم</label>
-                <label><input type="radio" name="idea-pay" value="ربما"> ربما</label>
-                <label><input type="radio" name="idea-pay" value="لا"> لا</label>
-              </div>
-            </fieldset>
-            <button class="stamp-btn" type="submit">سجّل اهتمامي</button>
-          </form>
-        </div>
-        <div class="success" id="idea-success">
-          <div class="mark">تم التسجيل</div>
-          <p>شكرًا لك — سنراسلك عند الإطلاق.</p>
-        </div>
-      </div>
+<div class="card form-card company" id="company-form">
+<span class="pin green"></span>
+<div class="form-body" id="company-body">
+<h3>أبحث عن أفكار</h3><p class="sub">سجّل بيانات شركتك لتصلك أفكار مطابقة لمجالكم فور الإطلاق</p>
+<form onsubmit="return submitForm(event,'company')">
+<label for="company-name">اسمك واسم الشركة</label><input type="text" id="company-name" name="name" required>
+<label for="company-email">البريد الإلكتروني</label><input type="email" id="company-email" name="email" required>
+<label for="company-domain">مجال اهتمام الشركة</label>
+<select id="company-domain" name="domain"><option value="">اختر مجالًا</option><option>تقنية</option><option>صحة</option><option>تعليم</option><option>تجارة</option><option>ذكاء اصطناعي</option><option>أخرى</option></select>
+<fieldset><legend>هل يهمكم فعليًا الوصول لأفكار مقيّمة ومطابقة لمجالكم؟</legend>
+<div class="yn"><label><input type="radio" name="wouldPay" value="نعم" required> نعم</label><label><input type="radio" name="wouldPay" value="ربما"> ربما</label><label><input type="radio" name="wouldPay" value="لا"> لا</label></div>
+</fieldset>
+<button class="stamp-btn" type="submit">سجّل اهتمام شركتي</button>
+<div class="error" id="company-error">حدث خطأ أثناء الإرسال. حاول مرة أخرى.</div>
+</form>
+</div>
+<div class="success" id="company-success"><div class="mark">تم التسجيل</div><p>شكرًا لكم — تم استلام بياناتكم بنجاح وسنتواصل معكم عند الإطلاق.</p></div>
+</div>
 
-      <!-- COMPANY FORM -->
-      <div class="card form-card company" id="company-form">
-        <span class="pin green"></span>
-        <div class="form-body" id="company-body">
-          <h3>أبحث عن أفكار</h3>
-          <p class="sub">سجّل بيانات شركتك لتصلك أفكار مطابقة لمجالكم فور الإطلاق</p>
-          <form onsubmit="return submitForm(event,'company')">
-            <label for="company-name">اسمك واسم الشركة</label>
-            <input type="text" id="company-name" required>
-            <label for="company-email">البريد الإلكتروني</label>
-            <input type="email" id="company-email" required>
-            <label for="company-domain">مجال اهتمام الشركة</label>
-            <select id="company-domain">
-              <option value="">اختر مجالًا</option>
-              <option>تقنية</option><option>صحة</option><option>تعليم</option>
-              <option>تجارة</option><option>ذكاء اصطناعي</option><option>أخرى</option>
-            </select>
-            <fieldset>
-              <legend>هل يهمكم فعليًا الوصول لأفكار مقيّمة ومطابقة لمجالكم؟</legend>
-              <div class="yn">
-                <label><input type="radio" name="company-pay" value="نعم" required> نعم</label>
-                <label><input type="radio" name="company-pay" value="ربما"> ربما</label>
-                <label><input type="radio" name="company-pay" value="لا"> لا</label>
-              </div>
-            </fieldset>
-            <button class="stamp-btn" type="submit">سجّل اهتمام شركتي</button>
-          </form>
-        </div>
-        <div class="success" id="company-success">
-          <div class="mark">تم التسجيل</div>
-          <p>شكرًا لكم — سنتواصل معكم عند الإطلاق.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <footer>IdeaMarket — نسخة اختبار مبكرة لقياس الاهتمام، وليست منصة فعّالة بعد.</footer>
+</div>
+</section>
+<footer>IdeaMarket — نسخة اختبار مبكرة لقياس الاهتمام.</footer>
 </div>
 
 <script>
+const FORMSPREE_URL = 'https://formspree.io/f/xeaqzlrz';
+
 async function submitForm(evt, kind){
   evt.preventDefault();
-  const btn = evt.target.querySelector('.stamp-btn');
+  const form = evt.target;
+  const btn = form.querySelector('.stamp-btn');
+  const error = document.getElementById(kind + '-error');
+
   btn.disabled = true;
+  error.classList.remove('show');
 
-  let entry;
-  if(kind === 'idea'){
-    entry = {
-      name: document.getElementById('idea-name').value,
-      email: document.getElementById('idea-email').value,
-      domain: document.getElementById('idea-domain').value,
-      wouldPay: (document.querySelector('input[name=idea-pay]:checked')||{}).value || '',
-      ts: new Date().toISOString()
-    };
-  } else {
-    entry = {
-      name: document.getElementById('company-name').value,
-      email: document.getElementById('company-email').value,
-      domain: document.getElementById('company-domain').value,
-      wouldPay: (document.querySelector('input[name=company-pay]:checked')||{}).value || '',
-      ts: new Date().toISOString()
-    };
-  }
+  const data = new FormData(form);
+  data.append('type', kind === 'idea' ? 'صاحب فكرة' : 'شركة');
+  data.append('submittedAt', new Date().toISOString());
+  data.append('_subject', kind === 'idea' ? 'IdeaMarket - تسجيل صاحب فكرة' : 'IdeaMarket - تسجيل شركة');
 
-  const key = kind === 'idea' ? 'waitlist-idea-owners' : 'waitlist-companies';
   try{
-    let list = [];
-    try{
-      const existing = await window.storage.get(key, true);
-      if(existing && existing.value){ list = JSON.parse(existing.value); }
-    }catch(e){ list = []; }
-    list.push(entry);
-    await window.storage.set(key, JSON.stringify(list), true);
-  }catch(e){
-    console.error('Storage error:', e);
-  }
+    const response = await fetch(FORMSPREE_URL, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
 
-  document.getElementById(kind + '-body').classList.add('hide');
-  document.getElementById(kind + '-success').classList.add('show');
+    if(!response.ok) throw new Error('Formspree request failed');
+
+    document.getElementById(kind + '-body').classList.add('hide');
+    document.getElementById(kind + '-success').classList.add('show');
+    form.reset();
+  }catch(e){
+    console.error(e);
+    error.classList.add('show');
+    btn.disabled = false;
+  }
   return false;
 }
 </script>
